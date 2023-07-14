@@ -1,0 +1,6 @@
+name: SerbleAntiCheat
+main: net.serble.anticheat.Main
+description: Serble's AntiCheat
+version: 0.1
+api-version: 1.13
+
