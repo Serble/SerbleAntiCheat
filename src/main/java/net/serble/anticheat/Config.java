@@ -46,6 +46,8 @@ public class Config {
 
     private static AtomicBoolean loadDefaults() {
         AtomicBoolean changed = new AtomicBoolean(false);
+        checkOrSet(changed, "debug", true);
+        checkOrSet(changed, "debug-check", "all");
         checkOrSet(changed, "lag-back", true);
         checkOrSet(changed, "tps-threshold", 19.0);
         checkOrSet(changed, "tps-sample-size", 100);
@@ -75,6 +77,7 @@ public class Config {
         checkOrSet(changed, "checks.speed.enabled", true);
         checkOrSet(changed, "checks.speed.threshold", 0.2);
         checkOrSet(changed, "checks.speed.speed-average-time-period-ms", 1000);
+        checkOrSet(changed, "checks.speed.sample-time", 1500);
 
         // jesus
         checkOrSet(changed, "checks.jesus.enabled", true);
@@ -137,5 +140,17 @@ public class Config {
 
     public static boolean isCheckEnabled(String checkName) {
         return configuration.getBoolean("checks." + checkName + ".enabled");
+    }
+
+    public static boolean debug() {
+        return configuration.getBoolean("debug");
+    }
+
+    public static String getDebugCheck() {
+        return configuration.getString("debug-check");
+    }
+
+    public static boolean amIDebugging(Check check) {
+        return debug() && (getDebugCheck().equalsIgnoreCase("all") || getDebugCheck().equalsIgnoreCase(check.getConfigName()));
     }
 }

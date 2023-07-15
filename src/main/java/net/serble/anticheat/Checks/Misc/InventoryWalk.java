@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class InventoryWalk extends Check {
     private final Map<Player, Boolean> playerInventoryStatus = new HashMap<>();
+    private final Map<Player, Boolean> hasStoppedMoving = new HashMap<>();
 
     @Override
     public String getName() {
@@ -29,6 +30,7 @@ public class InventoryWalk extends Check {
         HumanEntity humanEntity = event.getPlayer();
         if (humanEntity instanceof Player) {
             playerInventoryStatus.put((Player)humanEntity, true);
+            hasStoppedMoving.put((Player)humanEntity, false);
         }
     }
 
@@ -37,6 +39,7 @@ public class InventoryWalk extends Check {
         HumanEntity humanEntity = event.getPlayer();
         if (humanEntity instanceof Player){
             playerInventoryStatus.put((Player)humanEntity, false);
+            hasStoppedMoving.put((Player)humanEntity, false);
         }
     }
 
@@ -46,6 +49,11 @@ public class InventoryWalk extends Check {
         if (!canCheck(p)) return;
 
         if (!playerInventoryStatus.getOrDefault(p, false)) {
+            return;
+        }
+
+        if (!hasStoppedMoving.getOrDefault(p, false)) {
+            hasStoppedMoving.put(p, true);
             return;
         }
 

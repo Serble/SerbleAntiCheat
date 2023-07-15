@@ -2,12 +2,13 @@ package net.serble.anticheat.Checks.Movement;
 
 import net.serble.anticheat.Check;
 import net.serble.anticheat.Config;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerMoveEvent;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.UUID;
 
 public class UnaidedLevitation extends Check {
 
@@ -33,15 +34,12 @@ public class UnaidedLevitation extends Check {
             return;
         }
 
-        if (e.getFrom().getY() > Objects.requireNonNull(e.getTo()).getY()) {
+        if (isOnGround(p)) {
             blocksRaised.remove(playerId);
             return;
         }
 
-        // get the block the player is standing on
-        List<Material> standingOnBlocks = getBlocksPlayerIsStandingOn(p);
-        if (!standingOnBlocks.stream().allMatch(b -> b == Material.AIR)) {
-            blocksRaised.remove(playerId);
+        if (e.getFrom().getY() > Objects.requireNonNull(e.getTo()).getY()) {
             return;
         }
 

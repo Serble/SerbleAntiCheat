@@ -26,6 +26,16 @@ public abstract class Check implements Listener {
 
     public abstract String getConfigName();
 
+    public void debug(Player p, String message) {
+        if (debugging()) {
+            p.sendMessage(Utils.t("&c[AC " + getName() + "] &e" + message));
+        }
+    }
+
+    public boolean debugging() {
+        return Config.amIDebugging(this);
+    }
+
     public ConfigurationSection getConfig() {
         return Config.getConfiguration().getConfigurationSection("checks." + getConfigName());
     }
@@ -48,9 +58,16 @@ public abstract class Check implements Listener {
         if (!playerInWorlds && isWhitelist) {
             return false;
         }
-        if (TpsTracker.getTPS() < Config.getConfiguration().getDouble("tps-threshold")) {
-            p.sendMessage("Server is lagging, so we're not checking you.");
+        double tps = TpsTracker.getTPS();
+        if (tps < Config.getConfiguration().getDouble("tps-threshold")) {
+            if (Config.debug()) {
+                Utils.sendActionBarMessage(p, "&cChecks are disabled due to low TPS! &7(" + tps + " TPS)");
+            }
             return false;
+        } else {
+            if (Config.debug()) {
+                Utils.sendActionBarMessage(p, "&aChecks are enabled! &7(" + tps + " TPS)");
+            }
         }
         if (p.getPing() > Config.getConfiguration().getInt("ping-threshold")) {
             return false;
@@ -120,7 +137,7 @@ public abstract class Check implements Listener {
     }
 
     public boolean isBypassSpeed(Player p) {
-        if (p.getGameMode() == GameMode.SURVIVAL || p.getGameMode() == GameMode.ADVENTURE) {
+        if (p.getGameMode() != GameMode.SURVIVAL && p.getGameMode() != GameMode.ADVENTURE) {
             return true;
         }
         if (p.isRiptiding()) {
