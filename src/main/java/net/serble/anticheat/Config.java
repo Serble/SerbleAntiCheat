@@ -65,7 +65,7 @@ public class Config {
 
         // nuker
         checkOrSet(changed, "checks.nuker.enabled", true);
-        checkOrSet(changed, "checks.nuker.max-blocks-per-second", 15);
+        checkOrSet(changed, "checks.nuker.max-blocks-per-second", 25);
         checkOrSet(changed, "checks.nuker.sample-time", 1000);
 
         // block-place-speed
