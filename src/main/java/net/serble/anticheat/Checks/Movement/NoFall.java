@@ -66,12 +66,12 @@ public class NoFall extends Check {
             fallDistance.put(p.getUniqueId(), lastFallDistance + (e.getFrom().getY() - e.getTo().getY()));
         }
 
-        if (isOnGround && !p.getAllowFlight() && !p.isInsideVehicle()) {
-            if (isNegateFallDamage(p)) {
-                fallDistance.remove(p.getUniqueId());
-                return;
-            }
+        if (isNegateFallDamage(p)) {
+            fallDistance.remove(p.getUniqueId());
+            return;
+        }
 
+        if (isOnGround && !p.getAllowFlight() && !p.isInsideVehicle()) {
             Double lastFallDistance = fallDistance.get(p.getUniqueId());
             if (lastFallDistance == null) {
                 lastFallDistance = 0.0;

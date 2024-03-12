@@ -19,7 +19,7 @@ public abstract class Check implements Listener {
     }
 
     public void failed(Player p) {
-        p.sendMessage(Utils.t("&cYou failed &e" + getName() + "&c!"));
+        Main.getInstance().getViolationsManager().addViolation(getName(), p, getConfig().getInt("violation-strength"));
     }
 
     public abstract String getName();
@@ -113,7 +113,7 @@ public abstract class Check implements Listener {
     }
 
     public boolean isNegateFallDamage(Player p) {
-        List<Material> standingOn = getBlocksPlayerIsStandingOn(p);
+        List<Material> standingOn = getBlocksPlayerIsStandingOnAndAbove(p, 2, false);
         return isInBlock(Material.WATER, standingOn) ||
                 isInBlock(Material.LAVA, standingOn) ||
                 isInBlock(Material.SLIME_BLOCK, standingOn) ||

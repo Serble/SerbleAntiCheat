@@ -54,6 +54,7 @@ public class Config {
         checkOrSet(changed, "ping-threshold", 200);
         checkOrSet(changed, "disabled-worlds.worlds", new String[]{"example", "some-other-world"});
         checkOrSet(changed, "disabled-worlds.is-whitelist", false);
+        checkOrSet(changed, "violation-score-threshold-pm", 50);
 
         // Checks Config Sections
         checkOrSet(changed, "checks.cps-cap", 20);
@@ -62,59 +63,75 @@ public class Config {
         checkOrSet(changed, "checks.killaura.enabled", true);
         checkOrSet(changed, "checks.killaura.entity-hit-cap", 10);
         checkOrSet(changed, "checks.killaura.sample-time", 500);
+        checkOrSet(changed, "checks.killaura.violation-strength", 10);
 
         // nuker
         checkOrSet(changed, "checks.nuker.enabled", true);
         checkOrSet(changed, "checks.nuker.max-blocks-per-second", 25);
         checkOrSet(changed, "checks.nuker.sample-time", 1000);
+        checkOrSet(changed, "checks.nuker.violation-strength", 10);
 
         // block-place-speed
         checkOrSet(changed, "checks.block-place-speed.enabled", true);
         checkOrSet(changed, "checks.block-place-speed.sample-time", 1000);
         checkOrSet(changed, "checks.block-place-speed.max-blocks-per-second", 15);
+        checkOrSet(changed, "checks.block-place-speed.violation-strength", 20);
 
         // speed
         checkOrSet(changed, "checks.speed.enabled", true);
         checkOrSet(changed, "checks.speed.threshold", 0.2);
         checkOrSet(changed, "checks.speed.speed-average-time-period-ms", 1000);
         checkOrSet(changed, "checks.speed.sample-time", 1500);
+        checkOrSet(changed, "checks.speed.violation-strength", 10);
 
         // jesus
         checkOrSet(changed, "checks.jesus.enabled", true);
+        checkOrSet(changed, "checks.jesus.max-distance", 2.0);
+        checkOrSet(changed, "checks.jesus.sample-time", 2);
+        checkOrSet(changed, "checks.jesus.violation-strength", 10);
 
         // nofall
         checkOrSet(changed, "checks.nofall.enabled", true);
         checkOrSet(changed, "checks.nofall.enforce-fall-damage", true);
         checkOrSet(changed, "checks.nofall.time-until-fail", 1000);
+        checkOrSet(changed, "checks.nofall.violation-strength", 100);
 
         // speed
         checkOrSet(changed, "checks.speed.enabled", true);
+        checkOrSet(changed, "checks.speed.threshold", 1);
 
         // sneak
         checkOrSet(changed, "checks.sneak.enabled", true);
+        checkOrSet(changed, "checks.sneak.violation-strength", 10);
 
         // unaided-levitation
         checkOrSet(changed, "checks.unaided-levitation.enabled", true);
         checkOrSet(changed, "checks.unaided-levitation.threshold", 3);
+        checkOrSet(changed, "checks.unaided-levitation.violation-strength", 20);
 
         // basic-accelerate-up
         checkOrSet(changed, "checks.accelerate-up.enabled", true);
         checkOrSet(changed, "checks.accelerate-up.max-height-increase", 0.7);
+        checkOrSet(changed, "checks.accelerate-up.violation-strength", 20);
 
         // flight
         checkOrSet(changed, "checks.flight.enabled", true);
+        checkOrSet(changed, "checks.flight.violation-strength", 5);
 
         // no-view-limits
         checkOrSet(changed, "checks.no-view-limits.enabled", true);
+        checkOrSet(changed, "checks.no-view-limits.violation-strength", 40);
 
         // inventory-walk
         checkOrSet(changed, "checks.inventory-walk.enabled", true);
         checkOrSet(changed, "checks.inventory-walk.lag-back", true);
         checkOrSet(changed, "checks.inventory-walk.close-inventory", false);
+        checkOrSet(changed, "checks.inventory-walk.violation-strength", 10);
 
         // scaffold-walk
         checkOrSet(changed, "checks.scaffold-walk.enabled", true);
         checkOrSet(changed, "checks.scaffold-walk.max-ping", 120);
+        checkOrSet(changed, "checks.scaffold-walk.violation-strength", 100);
 
         return changed;
     }
