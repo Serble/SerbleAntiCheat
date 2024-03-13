@@ -26,7 +26,7 @@ public class ViolationsManager {
         p.sendMessage(Utils.t("&cYou failed &e" + check + "&c! &7Violation score: &e" + getViolationScore(playerId) + "&7/" + Config.getConfiguration().getInt("violation-score-threshold-pm")));
 
         if (getViolationScore(playerId) > Config.getConfiguration().getInt("violation-score-threshold-pm")) {
-            p.kickPlayer("You have been kicked for cheating.");
+            //p.kickPlayer("You have been kicked for cheating.");
             Bukkit.broadcastMessage(Utils.t("&c" + p.getName() + " &7has been kicked for cheating."));
         }
     }
